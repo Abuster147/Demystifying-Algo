@@ -1,0 +1,43 @@
+class Solution
+{
+    private:
+    int f(int i,int n,int w,int wt[], int val[]){
+        if(i==0){
+            if(wt[0]==w)return val[0];
+            
+            else return 0;
+        }
+        
+        int take = 0;
+        if(wt[i]<=w){
+            take = val[i] + f(i-1,n,w-wt[i],wt,val);
+        }
+        int nottake = f(i-1,n,w,wt,val);
+        
+        return max(take,nottake);
+    }
+    public:
+    //Function to return max value that can be put in knapsack of capacity W.
+    int knapSack(int W, int wt[], int val[], int n) 
+    { 
+       //return f(n-1,n,W,wt,val);
+       vector<vector<int>> dp(n+1,vector<int> (W+1,0));
+       
+       for(int j=0;j<=W;j++){
+           if(wt[0]<=j)dp[0][j] = val[0];
+       }
+       
+       for(int i=1;i<n;i++){
+           for(int j=0;j<=W;j++){
+                 int take = 0;
+                if(wt[i]<=j){
+                     take = val[i] + dp[i-1][j-wt[i]];//(i-1,n,w-wt[i],wt,val);
+                }
+                 int nottake = dp[i-1][j];//(i-1,n,w,wt,val);
+        
+                dp[i][j] = max(take,nottake);
+           }
+       }
+       return dp[n-1][W];
+    }
+};
