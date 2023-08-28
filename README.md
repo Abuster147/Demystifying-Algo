@@ -1,3 +1,3 @@
 # Demystifying-Algo
-This repo contains codes of algorithms implemented during the project <br/>
-#check out -> https://visualgo.net/en to know more about algos
+This repo contains algorithms implemented during the research project <br/>
+
